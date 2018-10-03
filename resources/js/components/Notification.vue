@@ -7,6 +7,7 @@
             <a class="dropdown-item" href="#" @click="MarkAsRead(notification)" v-for="notification in notifications">
                 {{ notification.data.userName }} commented on : {{ notification.data.post.title }}
             </a>
+            <div class="text-center" v-if="notifications.length === 0"> No notifications.</div>
         </div>
     </li>
 </template>

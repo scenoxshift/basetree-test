@@ -16,6 +16,9 @@ class EloquentPost extends BaseEloquent implements PostRepository
     }
 
 	public function getLastOrdered($paginate = 10) {
-        return $this->model->where('user_id', '!=', auth()->id())->orderBy('created_at', 'desc')->paginate($paginate);
+        return $this->model
+//			->where('user_id', '!=', auth()->id())
+			->orderBy('created_at', 'desc')
+			->paginate($paginate);
     }
 }

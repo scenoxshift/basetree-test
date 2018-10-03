@@ -57544,6 +57544,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['notifications'],
@@ -57595,29 +57596,38 @@ var render = function() {
         staticClass: "dropdown-menu dropdown-menu-right",
         attrs: { "aria-labelledby": "navbarNotifications" }
       },
-      _vm._l(_vm.notifications, function(notification) {
-        return _c(
-          "a",
-          {
-            staticClass: "dropdown-item",
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                _vm.MarkAsRead(notification)
+      [
+        _vm._l(_vm.notifications, function(notification) {
+          return _c(
+            "a",
+            {
+              staticClass: "dropdown-item",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  _vm.MarkAsRead(notification)
+                }
               }
-            }
-          },
-          [
-            _vm._v(
-              "\n            " +
-                _vm._s(notification.data.userName) +
-                " commented on : " +
-                _vm._s(notification.data.post.title) +
-                "\n        "
-            )
-          ]
-        )
-      })
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(notification.data.userName) +
+                  " commented on : " +
+                  _vm._s(notification.data.post.title) +
+                  "\n        "
+              )
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _vm.notifications.length === 0
+          ? _c("div", { staticClass: "text-center" }, [
+              _vm._v(" No notifications.")
+            ])
+          : _vm._e()
+      ],
+      2
     )
   ])
 }
