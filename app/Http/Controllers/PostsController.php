@@ -2,33 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DAL\Post\PostRepository;
-use App\Http\Requests\StorePost;
-use App\Post;
-use Illuminate\Http\Request;
+use App\BLL\PostResource;
+use BaseTree\Controllers\WebController;
 
-class PostsController extends Controller
+class PostsController extends WebController
 {
-	protected $postRepository;
-	public function __construct(PostRepository $postRepository)
+	public function __construct(PostResource $resource)
 	{
+		parent::__construct($resource);
 		$this->middleware('auth');
-		$this->postRepository = $postRepository;
-	}
-	
-	public function store(StorePost $request)
-	{
-		$data = $request->validated();
-		$data['user_id'] = auth()->id();
-		
-		$this->postRepository->create($data);
-		
-		return redirect()->back();
-	}
-
-	public function show($id)
-	{
-		$post = $this->postRepository->findOrFail($id);
-		return view('post.show', compact('post'));
+		$this->viewPath = 'post';
 	}
 }

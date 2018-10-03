@@ -6,13 +6,13 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        {{ $post->title }} 
+                        {{ $entity->title }} 
                     </div>
                     <div class="card-body">
-                        {{ $post->content }}
+                        {{ $entity->content }}
                     </div>
                     <div class="card-footer text-right">
-                        Created by: <b>{{ $post->user->name }}</b> <a href="{{ url('/home') }}" class="btn btn-link"><span class="glyphicon glyphicon-arrow-left"></span> Go Back</a>
+                        Created by: <b>{{ $entity->user->name }}</b> <a href="{{ route('home') }}" class="btn btn-link"><span class="glyphicon glyphicon-arrow-left"></span> Go Back</a>
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                 @endif
 
                 @if (session('errors'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger mt-5">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
                         @foreach (session('errors')->all() as $error)
                             <ul>
@@ -36,10 +36,10 @@
 
                 <div class="card mt-5">
                     <div class="card-header">
-                        Comments <span class="badge badge-primary">{{ $post->comments()->count() }}</span>
+                        Comments <span class="badge badge-primary">{{ $entity->comments()->count() }}</span>
                     </div>
                     <div class="card-body">
-                        @forelse ($post->comments()->orderBy('id', 'desc')->get() as $comment)
+                        @forelse ($entity->comments()->orderBy('id', 'desc')->get() as $comment)
                             <div class="card mb-2">
                                 <div class="card-body">
                                     {{ $comment->comment }}
@@ -55,7 +55,7 @@
                     <div class="card-footer">
                         <form action="{{ url('/comment/store') }}" method="post" style="display: flex;">
                             {{ csrf_field() }}
-                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="post_id" value="{{ $entity->id }}">
                             <input type="text" name="comment" placeholder="comment..." class="form-control" style="border-radius: 0;">
                             <input type="submit" value="Comment" class="btn btn-primary" style="border-radius: 0;">
                         </form>

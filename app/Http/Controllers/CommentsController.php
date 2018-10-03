@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\BLL\CommentResource;
-use App\DAL\Comment\CommentRepository;
 use BaseTree\Controllers\WebController;
 use Illuminate\Http\Request;
 
