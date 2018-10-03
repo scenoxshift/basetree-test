@@ -41,36 +41,40 @@
         <div class="row justify-content-center mt-5">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">All Posts</div>
-
+                    <div class="card-header">All Posts except mine</div>
+    
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Created by</th>
-                                    <th>Created at</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($posts as $post)
-                                <tr>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ substr(strip_tags($post->content), 0, 30) }}{{ strlen(strip_tags($post->content)) > 30 ? "....." : "" }}</td>
-                                    <td>{{ $post->user->name }}</td>
-                                    <td>{{ $post->created_at->diffForHumans() }}</td>
-                                    <td><a href="{{ route('post.show', $post->id) }}" class="btn btn-primary btn-xs">Show Post</a></td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="5">{{ $posts->links() }}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        @if(!$posts->isEmpty())
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Content</th>
+                                        <th>Created by</th>
+                                        <th>Created at</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($posts as $post)
+                                    <tr>
+                                        <td>{{ $post->title }}</td>
+                                        <td>{{ substr(strip_tags($post->content), 0, 30) }}{{ strlen(strip_tags($post->content)) > 30 ? "....." : "" }}</td>
+                                        <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->created_at->diffForHumans() }}</td>
+                                        <td><a href="{{ route('post.show', $post->id) }}" class="btn btn-primary btn-xs">Show Post</a></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">{{ $posts->links() }}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        @else
+                            <h3 class="text-center">No posts.</h3>
+                        @endif
                     </div>
                 </div>
             </div>
