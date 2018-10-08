@@ -13898,6 +13898,11 @@ __webpack_require__(13);
 window.Vue = __webpack_require__(38);
 
 /**
+ * Custom added 
+ */
+var loggedInUserId = document.head.querySelector('meta[name="userId"]').getAttribute('content');
+
+/**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
@@ -13913,13 +13918,14 @@ var app = new Vue({
     created: function created() {
         var _this = this;
 
-        axios.post('/notification/get').then(function (response) {
-            _this.notifications = response.data;
-        });
-        var userId = document.head.querySelector('meta[name="userId"]').getAttribute('content');
-        Echo.private('App.User.' + userId).notification(function (notification) {
-            _this.notifications.push(notification);
-        });
+        if (loggedInUserId) {
+            axios.post('/notification/get').then(function (response) {
+                _this.notifications = response.data;
+            });
+            Echo.private('App.User.' + userId).notification(function (notification) {
+                _this.notifications.push(notification);
+            });
+        }
     }
 });
 

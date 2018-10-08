@@ -13,14 +13,26 @@ use Illuminate\Http\Request;
 
 class CommentResource extends BaseResource implements StoreValidation
 {
+	/**
+	 * @var PostRepository
+	 */
 	protected $postRepository;
-	
-    public function __construct(CommentRepository $repository, PostRepository $postRepository)
+
+	/**
+	 * CommentResource constructor.
+	 * @param CommentRepository $repository
+	 * @param PostRepository $postRepository
+	 */
+	public function __construct(CommentRepository $repository, PostRepository $postRepository)
     {
         parent::__construct($repository);
         $this->postRepository = $postRepository;
     }
 
+	/**
+	 * @param array $attributes
+	 * @return \BaseTree\Models\BaseTreeModel|\Illuminate\Database\Eloquent\Builder|\Illuminate\Http\RedirectResponse
+	 */
 	public function store(array $attributes)
 	{
 		$attributes['user_id'] = auth()->id();
@@ -35,6 +47,10 @@ class CommentResource extends BaseResource implements StoreValidation
 		return redirect()->back();
 	}
 
+	/**
+	 * @param Request|null $request
+	 * @return array
+	 */
 	public function storeRules(Request $request = null): array
 	{
 		return [

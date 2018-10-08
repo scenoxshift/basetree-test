@@ -10,7 +10,11 @@ use App\DAL\User\UserRepository;
 
 class EloquentUser extends BaseEloquent implements UserRepository
 {
-    public function __construct(User $model)
+	/**
+	 * EloquentUser constructor.
+	 * @param User $model
+	 */
+	public function __construct(User $model)
     {
         parent::__construct($model);
     }

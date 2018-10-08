@@ -10,6 +10,11 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 /**
+ * Custom added 
+ */
+const loggedInUserId = document.head.querySelector('meta[name="userId"]').getAttribute('content');
+
+/**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
@@ -23,12 +28,13 @@ const app = new Vue({
         notifications: []
     },
     created() {
-        axios.post('/notification/get').then(response => {
-            this.notifications = response.data;
-        });
-        let userId = document.head.querySelector('meta[name="userId"]').getAttribute('content');
-        Echo.private('App.User.' + userId).notification((notification) => {
-            this.notifications.push(notification);
-        });
+        if(loggedInUserId) {
+            axios.post('/notification/get').then(response => {
+                this.notifications = response.data;
+            });
+            Echo.private('App.User.' + userId).notification((notification) => {
+                this.notifications.push(notification);
+            });
+        }
     }
 });

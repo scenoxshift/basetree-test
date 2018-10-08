@@ -10,15 +10,20 @@ use App\DAL\Post\PostRepository;
 
 class EloquentPost extends BaseEloquent implements PostRepository
 {
-    public function __construct(Post $model)
+	/**
+	 * EloquentPost constructor.
+	 * @param Post $model
+	 */
+	public function __construct(Post $model)
     {
         parent::__construct($model);
     }
 
+	/**
+	 * @param int $paginate
+	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+	 */
 	public function getLastOrdered($paginate = 10) {
-        return $this->model
-//			->where('user_id', '!=', auth()->id())
-			->orderBy('created_at', 'desc')
-			->paginate($paginate);
+        return $this->model->orderBy('created_at', 'desc')->paginate($paginate);
     }
 }

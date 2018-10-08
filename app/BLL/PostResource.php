@@ -10,11 +10,19 @@ use Illuminate\Http\Request;
 
 class PostResource extends BaseResource implements StoreValidation
 {
-    public function __construct(PostRepository $repository)
+	/**
+	 * PostResource constructor.
+	 * @param PostRepository $repository
+	 */
+	public function __construct(PostRepository $repository)
     {
         parent::__construct($repository);
     }
-    
+
+	/**
+	 * @param array $attributes
+	 * @return \BaseTree\Models\BaseTreeModel|\Illuminate\Database\Eloquent\Builder|\Illuminate\Http\RedirectResponse
+	 */
 	public function store(array $attributes)
 	{
 		$attributes['user_id'] = auth()->id();
@@ -24,6 +32,10 @@ class PostResource extends BaseResource implements StoreValidation
 		return redirect()->back();
 	}
 
+	/**
+	 * @param Request|null $request
+	 * @return array
+	 */
 	public function storeRules(Request $request = null): array
 	{
 		return [

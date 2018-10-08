@@ -29,10 +29,16 @@ class User extends Authenticatable implements BaseTreeModel
         'password', 'remember_token',
     ];
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function posts() {
 		return $this->hasMany('App\Post');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function comments() {
 		return $this->hasMany('App\Comment');
 	}

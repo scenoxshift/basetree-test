@@ -10,7 +10,11 @@ use App\DAL\Comment\CommentRepository;
 
 class EloquentComment extends BaseEloquent implements CommentRepository
 {
-    public function __construct(Comment $model)
+	/**
+	 * EloquentComment constructor.
+	 * @param Comment $model
+	 */
+	public function __construct(Comment $model)
     {
         parent::__construct($model);
     }

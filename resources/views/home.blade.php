@@ -4,7 +4,7 @@
     <div class="container">
         
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-10">
                 <div class="card">
                     <div class="card-header">Create a new Post</div>
 
@@ -27,7 +27,7 @@
                             </div>
                         @endif
 
-                        <form method="post" action="{{ url('/post/store') }}">
+                        <form method="post" action="{{ route('post.store') }}">
                             {{ csrf_field() }}
                             <input type="text" name="title" placeholder="title..." class="form-control" style="margin-bottom: 10px;">
                             <textarea name="content" rows="5" class="form-control" placeholder="content..." style="margin-bottom: 10px;"></textarea>
@@ -41,7 +41,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">All Posts except mine</div>
+                    <div class="card-header">All Posts</div>
     
                     <div class="card-body">
                         @if(!$posts->isEmpty())

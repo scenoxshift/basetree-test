@@ -17,12 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('levelAuth');
 
-Route::post('/post/store', 'PostsController@store')->middleware('auth');
-Route::get('/post/{id}', 'PostsController@show')->name('post.show')->middleware('auth');
+Route::resource('post', 'PostsController');
 
 Route::post('/comment/store', 'CommentsController@store')->middleware('auth');
 
 Route::post('/notification/get', 'NotificationsController@get');
 Route::post('/notification/read', 'NotificationsController@read');
+
+Route::get('/notifications', 'NotificationsController@index')->name('notifications');
