@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('levelAuth');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('post', 'PostsController');
 

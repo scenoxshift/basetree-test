@@ -32,7 +32,7 @@ const app = new Vue({
             axios.post('/notification/get').then(response => {
                 this.notifications = response.data;
             });
-            Echo.private('App.User.' + userId).notification((notification) => {
+            Echo.private('App.User.' + loggedInUserId).notification((notification) => {
                 this.notifications.push(notification);
             });
         }
