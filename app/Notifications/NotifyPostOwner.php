@@ -5,10 +5,10 @@ namespace App\Notifications;
 use App\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-//use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 //use Illuminate\Notifications\Messages\MailMessage;
 
-class NotifyPostOwner extends Notification
+class NotifyPostOwner extends Notification implements ShouldQueue
 {
     use Queueable;
 	
