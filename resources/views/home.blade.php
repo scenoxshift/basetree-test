@@ -48,17 +48,17 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Content</th>
-                                        <th>Created by</th>
-                                        <th>Created at</th>
-                                        <th></th>
+                                        <th width="30%">Title</th>
+                                        <th width="30%">Content</th>
+                                        <th width="30%">Created by</th>
+                                        <th width="30%">Created at</th>
+                                        <th width="30%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($posts as $post)
                                     <tr>
-                                        <td>{{ $post->title }}</td>
+                                        <td>{{ substr(strip_tags($post->title), 0, 30) }}{{ strlen(strip_tags($post->title)) > 30 ? "....." : "" }}</td>
                                         <td>{{ substr(strip_tags($post->content), 0, 30) }}{{ strlen(strip_tags($post->content)) > 30 ? "....." : "" }}</td>
                                         <td>{{ $post->user->name }}</td>
                                         <td>{{ $post->created_at->diffForHumans() }}</td>

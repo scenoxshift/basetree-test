@@ -5,7 +5,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarNotifications">
             <a class="dropdown-item" href="#" @click="MarkAsRead(notification)" v-for="notification in notifications">
-                {{ notification.data.userName }} commented on : {{ notification.data.post.title }}
+                {{ notification.data.userName }} commented on : {{ notificationShortText(notification) }}
             </a>
             <div class="text-center" v-if="notifications.length === 0"> No notifications.</div>
         </div>
@@ -13,15 +13,18 @@
 </template>
 
 <script>
+    import { shortTextMixin } from "../mixins/shortText";
+
     export default {
         props: ['notifications'],
+        mixins: [shortTextMixin],
         methods: {
             MarkAsRead(notification) {
                 axios.post('/notification/read', { id: notification.id }).then(() => {
                     window.location.href = "/post/" + notification.data.post.id;
                 });
-            }
-        }
+            },
+        },
     }
 </script>
 

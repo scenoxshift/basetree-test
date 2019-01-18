@@ -1,9 +1,9 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import { shortTextMixin } from "./mixins/shortText";
 
 require('./bootstrap');
 
@@ -30,6 +30,7 @@ Vue.component('notification', require('./components/Notification.vue'));
 
 const app = new Vue({
     el: '#app',
+    mixins: [shortTextMixin],
     data: {
         notifications: []
     },
@@ -39,7 +40,7 @@ const app = new Vue({
                 this.notifications = response.data;
             });
             Echo.private('notifications_'+loggedInUserId).notification((notification) => {
-                toastr.info('', notification.data.userName + " commented on : " +notification.data.post.title, { 
+                toastr.info('', notification.data.userName + " commented on : " + notificationShortText(notification), { 
                     onclick: function() {
                         axios.post('/notification/read', { id: notification.id }).then(() => {
                             window.location.href = "/post/" + notification.data.post.id;
