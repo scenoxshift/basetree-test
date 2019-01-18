@@ -11,13 +11,16 @@ class NotificationsController extends Controller
 		$notifications = auth()->user()->notifications->filter(function ($notification){
 			return $notification->read_at !== NULL;
 		})->toArray();
+		
 		return view('notifications.index', compact('notifications'));
 	}
+	
 	/**
 	 * @return mixed
 	 */
 	public function get() {
 		$notifications = auth()->user()->unreadNotifications;
+		
 		return $notifications;
 	}
 
@@ -26,6 +29,7 @@ class NotificationsController extends Controller
 	 */
 	public function read() {
 		auth()->user()->unreadNotifications()->find(request('id'))->markAsRead();
+		
 		return 'success';
 	}
 }

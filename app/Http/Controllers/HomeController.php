@@ -28,6 +28,7 @@ class HomeController extends Controller
 	public function index()
 	{
 		$posts = $this->postRepository->getLastOrdered(10);
+		
 		return view('home', compact('posts'));
 	}
 }
