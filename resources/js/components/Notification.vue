@@ -1,7 +1,7 @@
 <template>
     <li class="nav-item dropdown">
         <a class="nav-link" href="#" id="navbarNotifications" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-bell"></i><span class="badge badge-count badge-primary">{{ notifications.length }}</span>
+            <i class="fa fa-bell"></i><span v-if="notifications.length > 0" class="badge badge-count badge-primary">{{ notifications.length }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarNotifications">
             <a class="dropdown-item" href="#" @click="MarkAsRead(notification)" v-for="notification in notifications">
@@ -17,10 +17,7 @@
         props: ['notifications'],
         methods: {
             MarkAsRead(notification) {
-                let data = {
-                    id: notification.id
-                };
-                axios.post('/notification/read', data).then(() => {
+                axios.post('/notification/read', { id: notification.id }).then(() => {
                     window.location.href = "/post/" + notification.data.post.id;
                 });
             }

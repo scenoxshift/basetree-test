@@ -9,6 +9,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.toastr = require('toastr');
+
+toastr.options = {
+    "closeButton": true,
+};
+
 /**
  * Custom added 
  */
@@ -33,6 +39,13 @@ const app = new Vue({
                 this.notifications = response.data;
             });
             Echo.private('notifications_'+loggedInUserId).notification((notification) => {
+                toastr.info('', notification.data.userName + " commented on : " +notification.data.post.title, { 
+                    onclick: function() {
+                        axios.post('/notification/read', { id: notification.id }).then(() => {
+                            window.location.href = "/post/" + notification.data.post.id;
+                        });
+                    }
+                });
                 this.notifications.push(notification);
             });
         }
