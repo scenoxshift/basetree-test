@@ -3,7 +3,6 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-import { shortTextMixin } from "./mixins/shortText";
 
 require('./bootstrap');
 
@@ -13,6 +12,7 @@ window.toastr = require('toastr');
 
 toastr.options = {
     "closeButton": true,
+    "timeOut": "99999"
 };
 
 /**
@@ -28,6 +28,8 @@ const loggedInUserId = document.head.querySelector('meta[name="userId"]').getAtt
 
 Vue.component('notification', require('./components/Notification.vue'));
 
+import {shortTextMixin} from "./mixins/shortText";
+
 const app = new Vue({
     el: '#app',
     mixins: [shortTextMixin],
@@ -40,7 +42,7 @@ const app = new Vue({
                 this.notifications = response.data;
             });
             Echo.private('notifications_'+loggedInUserId).notification((notification) => {
-                toastr.info('', notification.data.userName + " commented on : " + notificationShortText(notification), { 
+                toastr.info('', notification.data.userName + " commented on : " + this.notificationShortText(notification), { 
                     onclick: function() {
                         axios.post('/notification/read', { id: notification.id }).then(() => {
                             window.location.href = "/post/" + notification.data.post.id;
