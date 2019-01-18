@@ -42,4 +42,14 @@ class User extends Authenticatable implements BaseTreeModel
 	public function comments() {
 		return $this->hasMany('App\Comment');
 	}
+
+    /**
+     * The channels the user receives notification broadcasts on.
+     *
+     * @return string
+     */
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'notifications_'.$this->id;
+    }
 }

@@ -11,6 +11,6 @@
 |
 */
 
-Broadcast::channel('notifications', function ($user, $id) {
+Broadcast::channel("notifications_{id}", function ($user, $id) {
     return (int) $user->id === (int) $id;
 });

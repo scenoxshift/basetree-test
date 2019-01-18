@@ -41,8 +41,10 @@ class CommentResource extends BaseResource implements StoreValidation
 		parent::store($attributes);
 
 		$post = $this->postRepository->findWithRelations(request('post_id'), ['user']);
-		if($post->user->id != auth()->id())
-		$post->user->notify(new NotifyPostOwner($post, auth()->user()->name));
+		
+		if($post->user->id != auth()->id()) {
+            $post->user->notify(new NotifyPostOwner($post, auth()->user()->name));
+        }
 
 		return redirect()->back();
 	}
