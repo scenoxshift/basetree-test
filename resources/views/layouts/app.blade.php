@@ -32,7 +32,10 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('notifications') }}">Notifications</a>
+                                <a class="nav-link @if(request()->fullUrl() == route('notifications')) active @endif" href="{{ route('notifications') }}">Notifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(request()->fullUrl() == route('chat')) active @endif" href="{{ route('chat') }}">Chat</a>
                             </li>
                         @endauth
                     </ul>

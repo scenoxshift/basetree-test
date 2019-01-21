@@ -17,13 +17,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('post', 'PostsController');
+    Route::resource('post', 'PostsController');
 
-Route::post('/comment/store', 'CommentsController@store')->middleware('auth');
+    Route::post('/comment/store', 'CommentsController@store');
 
-Route::post('/notification/get', 'NotificationsController@get');
-Route::post('/notification/read', 'NotificationsController@read');
+    Route::post('/notification/get', 'NotificationsController@get');
+    Route::post('/notification/read', 'NotificationsController@read');
 
-Route::get('/notifications', 'NotificationsController@index')->name('notifications');
+    Route::get('/notifications', 'NotificationsController@index')->name('notifications');
+
+    Route::get('chat', 'MessagesController@index')->name('chat');
+    Route::get('fetchMessages', 'MessagesController@fetchMessages');
+    Route::post('sendMessage', 'MessagesController@sendMessage');
+});

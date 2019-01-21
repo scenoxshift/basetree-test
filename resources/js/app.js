@@ -27,8 +27,12 @@ const loggedInUserId = document.head.querySelector('meta[name="userId"]').getAtt
  */
 
 Vue.component('notification', require('./components/Notification.vue'));
+Vue.component('chat-messages', require('./components/ChatMessages.vue'));
+Vue.component('chat-form', require('./components/ChatForm.vue'));
 
 import {shortTextMixin} from "./mixins/shortText";
+
+window.ChatBus = new Vue();
 
 const app = new Vue({
     el: '#app',
@@ -38,9 +42,8 @@ const app = new Vue({
     },
     created() {
         if(loggedInUserId) {
-            axios.post('/notification/get').then(response => {
-                this.notifications = response.data;
-            });
+            this.fetchNotifications();
+            
             Echo.private('notifications_'+loggedInUserId).notification((notification) => {
                 toastr.info('', notification.data.userName + " commented on : " + this.notificationShortText(notification), { 
                     onclick: function() {
@@ -50,6 +53,14 @@ const app = new Vue({
                     }
                 });
                 this.notifications.push(notification);
+            });
+        }
+    },
+    methods: {
+        fetchNotifications() {
+            const $this = this;
+            axios.post('/notification/get').then(({data}) => {
+                $this.notifications = data;
             });
         }
     }

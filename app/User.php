@@ -52,4 +52,12 @@ class User extends Authenticatable implements BaseTreeModel
     {
         return 'notifications_'.$this->id;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
