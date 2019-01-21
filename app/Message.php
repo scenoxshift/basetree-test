@@ -2,9 +2,10 @@
 
 namespace App;
 
+use BaseTree\Models\BaseTreeModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Message extends Model implements BaseTreeModel
 {
     
     protected $fillable = ['message'];

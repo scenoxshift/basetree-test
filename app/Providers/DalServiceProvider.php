@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\DAL\Comment\CommentRepository;
 use App\DAL\Comment\EloquentComment;
+use App\DAL\Message\EloquentMessage;
+use App\DAL\Message\MessageRepository;
 use App\DAL\Post\EloquentPost;
 use App\DAL\Post\PostRepository;
 use App\DAL\User\EloquentUser;
@@ -17,6 +19,7 @@ class DalServiceProvider extends ServiceProvider
 			UserRepository::class => EloquentUser::class,
 			PostRepository::class => EloquentPost::class,
 			CommentRepository::class => EloquentComment::class,
+			MessageRepository::class => EloquentMessage::class,
 			# Every other repository should be registered here
 		];
 

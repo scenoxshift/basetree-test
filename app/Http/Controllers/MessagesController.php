@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\DAL\Message\MessageRepository;
 use App\Events\MessageSent;
-use App\Message;
 
 class MessagesController extends Controller
 {
     /**
-     * MessagesController constructor.
+     * @var MessageRepository
      */
-    public function __construct()
+    private $messageRepository;
+
+    /**
+     * MessagesController constructor.
+     * @param MessageRepository $messageRepository
+     */
+    public function __construct(MessageRepository $messageRepository)
     {
         $this->middleware('auth');
+        $this->messageRepository = $messageRepository;
     }
     
     /**
@@ -28,7 +35,7 @@ class MessagesController extends Controller
      */
     public function fetchMessages()
     {
-        return Message::with('user')->take(50)->get();
+        return $this->messageRepository->getLastFiftyWithUserRelation();
     }
 
     /**
