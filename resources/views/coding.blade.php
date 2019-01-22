@@ -43,9 +43,9 @@
                             <tbody>
                             <tr>
                                 <td>Controller</td>
-                                <td>singular</td>
-                                <td>ArticleController</td>
-                                <td><del>ArticlesController</del></td>
+                                <td>singular / plural</td>
+                                <td>ArticleController / ArticlesController</td>
+                                <td><del>Articles / Article</del></td>
                             </tr>
                             <tr>
                                 <td>Route</td>
