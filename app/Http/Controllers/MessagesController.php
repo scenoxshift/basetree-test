@@ -33,7 +33,7 @@ class MessagesController extends Controller
     /**
      * @return mixed
      */
-    public function fetchMessages()
+    public function fetch()
     {
         return $this->messageRepository->getLastFiftyWithUserRelation();
     }
@@ -41,7 +41,7 @@ class MessagesController extends Controller
     /**
      * @return array
      */
-    public function sendMessage()
+    public function send()
     {
         $message = auth()->user()->messages()->create([
             'message' => request('message')

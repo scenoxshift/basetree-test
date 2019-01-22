@@ -30,6 +30,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/notifications', 'NotificationsController@index')->name('notifications');
 
     Route::get('chat', 'MessagesController@index')->name('chat');
-    Route::get('fetchMessages', 'MessagesController@fetchMessages');
-    Route::post('sendMessage', 'MessagesController@sendMessage');
+    Route::get('fetchMessages', 'MessagesController@fetch');
+    Route::post('sendMessage', 'MessagesController@send');
+});
+
+Route::get('/code', function () {
+    return view('coding');
 });
